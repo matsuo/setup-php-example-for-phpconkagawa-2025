@@ -9,11 +9,14 @@ permissions:
 jobs:
   test:
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        php-versions: ['8.2', '8.3', '8.4', '8.5']
     steps:
       - name: Setup PHP
         uses: shivammathur/setup-php@bf6b4fbd49ca58e4608c9c89fba0b8d90bd2a39f # v2.35.5
         with:
-          php-version: '8.5'
+          php-version: ${{ matrix.php-versions }}
 
       - uses: actions/checkout@v5
 
