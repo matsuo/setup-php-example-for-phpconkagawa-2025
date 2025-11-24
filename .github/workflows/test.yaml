@@ -18,6 +18,8 @@ jobs:
         uses: shivammathur/setup-php@bf6b4fbd49ca58e4608c9c89fba0b8d90bd2a39f # v2.35.5
         with:
           php-version: ${{ matrix.php-versions }}
+          tools: phan:5.5.2
+          coverage: none
 
       - uses: actions/checkout@v5
 
@@ -26,3 +28,6 @@ jobs:
 
       - name: Run PHPUnit
         run: ./vendor/bin/phpunit tests
+
+      - name: Run Phan
+        run: phan -d ./ -k .phan/config.php --output-mode=github
